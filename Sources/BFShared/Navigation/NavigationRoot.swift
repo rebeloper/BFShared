@@ -11,11 +11,10 @@ public struct NavigationRoot<Root: View>: View {
     
     @EnvironmentObject private var navigation: Navigation
     
-    let index: Int
+    let index: Int = 0
     let root: () -> Root
     
-    public init(index: Int = 0, _ root: @escaping () -> Root) {
-        self.index = index
+    public init(_ root: @escaping () -> Root) {
         self.root = root
     }
     
