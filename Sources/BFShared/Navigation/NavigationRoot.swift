@@ -11,7 +11,6 @@ public struct NavigationRoot<Root: View>: View {
     
     @EnvironmentObject private var navigation: Navigation
     
-    let index: Int = 0
     let root: () -> Root
     
     public init(_ root: @escaping () -> Root) {
@@ -19,11 +18,8 @@ public struct NavigationRoot<Root: View>: View {
     }
     
     public var body: some View {
-        NavigationStack(path: $navigation.paths[index]) {
+        NavigationStack(path: $navigation.paths[0]) {
             root()
-        }
-        .onAppear {
-            navigation.index = index
         }
     }
 }
