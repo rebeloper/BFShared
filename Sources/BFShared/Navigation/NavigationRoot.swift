@@ -7,19 +7,19 @@
 
 import SwiftUI
 
-struct NavigationRoot<Root: View>: View {
+public struct NavigationRoot<Root: View>: View {
     
     @EnvironmentObject private var navigation: Navigation
     
     let index: Int
     let root: () -> Root
     
-    init(index: Int = 0, _ root: @escaping () -> Root) {
+    public init(index: Int = 0, _ root: @escaping () -> Root) {
         self.index = index
         self.root = root
     }
     
-    var body: some View {
+    public var body: some View {
         NavigationStack(path: $navigation.paths[index]) {
             root()
         }
