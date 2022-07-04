@@ -13,16 +13,18 @@ public class Navigation: ObservableObject {
     @Published var paths = [NavigationPath()]
     @Published var index = 0
     
+    public init () {}
+    
     /// Pushes a new value to the end of this path.
     /// - Parameters:
     ///   - value: The value to push.
-    func push<V>(_ value: V, completion: @escaping () -> () = {}) where V : Decodable, V : Encodable, V : Hashable {
+    public func push<V>(_ value: V, completion: @escaping () -> () = {}) where V : Decodable, V : Encodable, V : Hashable {
         paths[index].push(value, completion: completion)
     }
     
     /// Pops values from the end of this path according to the provided `PopType`
     /// - Parameter type: The pop type
-    func pop(_ type: NavigationPath.PopType = .one, completion: @escaping () -> () = {}) {
+    public func pop(_ type: NavigationPath.PopType = .one, completion: @escaping () -> () = {}) {
         paths[index].pop(type, completion: completion)
     }
     
