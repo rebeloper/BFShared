@@ -11,12 +11,12 @@ import BetterCodable
 import Firebase
 import FirebaseFirestoreSwift
 
-struct Name: Codable {
+public struct Name: Codable {
     
-    @DefaultEmptyString var first: String
-    @DefaultEmptyString var last: String
+    @DefaultEmptyString public var first: String
+    @DefaultEmptyString public var last: String
     
-    init(first: String? = nil,
+    public init(first: String? = nil,
          last: String? = nil) {
         self.first = first ?? ""
         self.last = last ?? ""
@@ -24,10 +24,10 @@ struct Name: Codable {
     
 }
 
-struct DefaultNameStrategy: DefaultCodableStrategy {
-    static var defaultValue: Name { return Name() }
+public struct DefaultNameStrategy: DefaultCodableStrategy {
+    public static var defaultValue: Name { return Name() }
 }
 
-typealias DefaultEmptyName = DefaultCodable<DefaultNameStrategy>
+public typealias DefaultEmptyName = DefaultCodable<DefaultNameStrategy>
 
 

@@ -12,18 +12,18 @@ import BetterCodable
 import Firebase
 import FirebaseFirestoreSwift
 
-struct Admin: Codable, Identifiable, Firestorable {
+public struct Admin: Codable, Identifiable, Firestorable {
     
-    @DocumentID var id: String?
-    @DefaultEmptyString var uid: String
-    @DefaultTimestamp var createdAt: Timestamp
-    @DefaultEmptyName var name: Name
-    @DefaultZeroInt var role: Int
-    @DefaultEmptyString var phone: String
-    @DefaultEmptyString var fcmToken: String
-    @DefaultEmptyString var profileImageUrl: String
+    @DocumentID public var id: String?
+    @DefaultEmptyString public var uid: String
+    @DefaultTimestamp public var createdAt: Timestamp
+    @DefaultEmptyName public var name: Name
+    @DefaultZeroInt public var role: Int
+    @DefaultEmptyString public var phone: String
+    @DefaultEmptyString public var fcmToken: String
+    @DefaultEmptyString public var profileImageUrl: String
     
-    init(uid: String? = nil,
+    public init(uid: String? = nil,
          createdAt: Timestamp? = nil,
          name: Name? = nil,
          role: Int? = nil,
@@ -41,10 +41,10 @@ struct Admin: Codable, Identifiable, Firestorable {
     
 }
 
-struct DefaultAdminStrategy: DefaultCodableStrategy {
-    static var defaultValue: Admin { return Admin() }
+public struct DefaultAdminStrategy: DefaultCodableStrategy {
+    public static var defaultValue: Admin { return Admin() }
 }
 
-typealias DefaultEmptyAdmin = DefaultCodable<DefaultAdminStrategy>
+public typealias DefaultEmptyAdmin = DefaultCodable<DefaultAdminStrategy>
 
 
