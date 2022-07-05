@@ -14,7 +14,7 @@ public struct NavigationRoot<R, D, C>: View where R: View, D : Hashable, C : Vie
     let data: D.Type
     @ViewBuilder let destination: (D) -> C
     
-    public init(_ navigation: Navigation? = nil,
+    public init(navigation: Navigation? = nil,
                 _ root: @escaping () -> R,
                 with data: D.Type,
                 @ViewBuilder destination: @escaping (D) -> C) {
