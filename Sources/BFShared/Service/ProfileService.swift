@@ -14,11 +14,7 @@ public class ProfileService: ObservableObject {
     public init() {}
     
     @Published public var admin = Admin()
-    
-    @MainActor
-    public func createAdminIfNonExistent() async throws {
-        admin = try await FirestoreManager.createIfNonExistent(admin, withUid: admin.uid, atPath: Path.Firestore.admins)
-    }
+    @Published public var merchant = Merchant()
     
     public func signIn(withEmail email: String, password: String) async throws {
         try await Auth.auth().signIn(withEmail: email, password: password)
@@ -33,8 +29,23 @@ public class ProfileService: ObservableObject {
     }
     
     @MainActor
+    public func createAdminIfNonExistent() async throws {
+        admin = try await FirestoreManager.createIfNonExistent(admin, withUid: admin.uid, atPath: Path.Firestore.admins)
+    }
+    
+    @MainActor
+    public func createMerchantIfNonExistent() async throws {
+        merchant = try await FirestoreManager.createIfNonExistent(merchant, withUid: merchant.uid, atPath: Path.Firestore.merchants)
+    }
+    
+    @MainActor
     public func fetchAdmin(uid: String) async throws {
         admin = try await FirestoreManager.read(atPath: Path.Firestore.admins, uid: uid)
+    }
+    
+    @MainActor
+    public func fetchMerchant(uid: String) async throws {
+        merchant = try await FirestoreManager.read(atPath: Path.Firestore.merchants, uid: uid)
     }
 }
 
