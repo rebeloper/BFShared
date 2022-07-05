@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct Path {
+public struct Path {
     
-    struct Firestore {
-        static let admins = "admins"
+    public struct Firestore {
+        public static let admins = "admins"
     }
     
 }
