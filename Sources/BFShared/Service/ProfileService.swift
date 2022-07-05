@@ -11,6 +11,8 @@ import FirebaseAuth
 
 public class ProfileService: ObservableObject {
     
+    public init() {}
+    
     @Published public var admin = Admin()
     
     @MainActor
