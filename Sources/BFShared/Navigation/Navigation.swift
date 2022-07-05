@@ -18,7 +18,7 @@ public class Navigation: ObservableObject {
     /// Pushes a new value to the end of this path.
     /// - Parameters:
     ///   - value: The value to push.
-    public func push<V>(_ value: V, completion: @escaping () -> () = {}) where V : Decodable, V : Encodable, V : Hashable {
+    public func push<V>(_ value: V, completion: @escaping () -> () = {}) where V : Hashable {
         paths[index].push(value, completion: completion)
     }
     

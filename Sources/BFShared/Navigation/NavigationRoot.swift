@@ -7,20 +7,29 @@
 
 import SwiftUI
 
-public struct NavigationRoot<Root: View>: View {
+public struct NavigationRoot<R, D, C>: View where R: View, D : Hashable, C : View {
     
-    @EnvironmentObject private var navigation: Navigation
+    @ObservedObject var navigation: Navigation
+    let root: () -> R
+    let data: D.Type
+    @ViewBuilder let destination: (D) -> C
     
-    let root: () -> Root
-    
-    public init(_ root: @escaping () -> Root) {
+    public init(_ navigation: Navigation? = nil,
+                _ root: @escaping () -> R,
+                with data: D.Type,
+                @ViewBuilder destination: @escaping (D) -> C) {
+        self.navigation = navigation ?? Navigation()
         self.root = root
+        self.data = data
+        self.destination = destination
     }
     
     public var body: some View {
         NavigationStack(path: $navigation.paths[0]) {
             root()
+                .navigationDestination(for: data, destination: destination)
         }
+        .environmentObject(navigation)
     }
 }
 

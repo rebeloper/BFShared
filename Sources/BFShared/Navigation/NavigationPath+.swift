@@ -19,7 +19,7 @@ public extension NavigationPath {
     /// Pushes a new value to the end of this path.
     /// - Parameters:
     ///   - value: The value to push.
-    mutating func push<V>(_ value: V, completion: @escaping () -> () = {}) where V : Decodable, V : Encodable, V : Hashable {
+    mutating func push<V>(_ value: V, completion: @escaping () -> () = {}) where V : Hashable {
         append(value)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
             completion()
