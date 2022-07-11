@@ -1,10 +1,9 @@
 //
-//  Admin.swift
+//  Customer.swift
 //  
 //
-//  Created by Alex Nagy on 04.07.2022.
+//  Created by Alex Nagy on 11.07.2022.
 //
-
 
 import SwiftUI
 import FirebaseService
@@ -12,7 +11,7 @@ import BetterCodable
 import Firebase
 import FirebaseFirestoreSwift
 
-public struct Admin: Codable, Identifiable, Firestorable {
+public struct Customer: Codable, Identifiable, Firestorable {
     
     @DocumentID public var id: String?
     @DefaultEmptyString public var uid: String
@@ -22,6 +21,7 @@ public struct Admin: Codable, Identifiable, Firestorable {
     @DefaultEmptyString public var phone: String
     @DefaultEmptyString public var fcmToken: String
     @DefaultEmptyString public var profileImageUrl: String
+    @DefaultEmptyArray var favoriteMerchants: [String]
     
     public init(uid: String? = nil,
                 createdAt: Timestamp? = nil,
@@ -29,7 +29,8 @@ public struct Admin: Codable, Identifiable, Firestorable {
                 role: Int? = nil,
                 phone: String? = nil,
                 fcmToken: String? = nil,
-                profileImageUrl: String? = nil) {
+                profileImageUrl: String? = nil,
+                favoriteMerchants: [String]? = nil) {
         self.uid = uid ?? ""
         self.createdAt = createdAt ?? Timestamp()
         self.name = name ?? Name()
@@ -37,14 +38,16 @@ public struct Admin: Codable, Identifiable, Firestorable {
         self.phone = phone ?? ""
         self.fcmToken = fcmToken ?? ""
         self.profileImageUrl = profileImageUrl ?? ""
+        self.favoriteMerchants = favoriteMerchants ?? []
     }
     
 }
 
-public struct DefaultAdminStrategy: DefaultCodableStrategy {
-    public static var defaultValue: Admin { return Admin() }
+public struct DefaultCustomerStrategy: DefaultCodableStrategy {
+    public static var defaultValue: Customer { return Customer() }
 }
 
-public typealias DefaultEmptyAdmin = DefaultCodable<DefaultAdminStrategy>
+public typealias DefaultEmptyCustomer = DefaultCodable<DefaultCustomerStrategy>
+
 
 

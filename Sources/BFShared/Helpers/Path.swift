@@ -12,6 +12,7 @@ public struct Path {
     public struct Firestore {
         public static let admins = "admins"
         public static let merchants = "merchants"
+        public static let customers = "customers"
     }
     
 }
