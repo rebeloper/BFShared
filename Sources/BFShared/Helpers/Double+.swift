@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Double {
+public extension Double {
     func toStripeInt() -> Int {
         Int(self * 100)
     }
