@@ -58,5 +58,10 @@ public class ProfileService: ObservableObject {
     public func fetchMerchant(uid: String) async throws {
         merchant = try await FirestoreManager.read(atPath: Path.Firestore.merchants, uid: uid)
     }
+    
+    @MainActor
+    public func createTemplateProduct(size: TemplateProductSize) async throws {
+        try await FirestoreManager.create(size, atPath: Path.Firestore.templateProductSizes)
+    }
 }
 

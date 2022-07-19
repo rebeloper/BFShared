@@ -13,6 +13,8 @@ public struct Path {
         public static let admins = "admins"
         public static let merchants = "merchants"
         public static let customers = "customers"
+        
+        public static let templateProductSizes = "templateProductSizes"
     }
     
 }
