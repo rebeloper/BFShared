@@ -68,5 +68,10 @@ public class ProfileService: ObservableObject {
     public func fetchTemplateProductSizes() async throws -> [TemplateProductSize] {
         try await FirestoreManager.read(atPath: Path.Firestore.templateProductSizes)
     }
+    
+    @MainActor
+    public func deleteTemplateProductSize(uid: String) async throws {
+        try await FirestoreManager<TemplateProductSize>.delete(atPath: Path.Firestore.templateProductSizes, withUid: uid)
+    }
 }
 
