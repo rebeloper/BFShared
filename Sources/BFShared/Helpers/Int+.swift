@@ -17,7 +17,7 @@ public extension Int {
             if self % 100 == 0 {
                 return "\(currency)\(self / 100).00"
             } else {
-                return "\(currency)\(self / 10).0"
+                return "\(currency)\(self.toStripeDouble().convert(maxDecimals: 1))0"
             }
         } else {
             return "\(currency)\(self.toStripeDouble().convert(maxDecimals: 2))"
