@@ -161,17 +161,22 @@ public struct NavigationRootSheetNoDestination<R>: View where R: View {
     @EnvironmentObject private var navigation: Navigation
     
     var path: Navigation.SheetPath
+    var hasFlexibelDetent: Bool
     var detents: Set<PresentationDetent> = []
     var dragIndicator: Visibility = .hidden
     var root: () -> R
     var onDismiss: (() -> Void)?
     
+    @State private var felxibleSheetSize: CGSize = .zero
+    
     public init(path: Navigation.SheetPath,
+                hasFlexibelDetent: Bool,
                 detents: Set<PresentationDetent> = [],
                 dragIndicator: Visibility = .hidden,
                 _ root: @escaping () -> R,
                 onDismiss: (() -> Void)? = nil) {
         self.path = path
+        self.hasFlexibelDetent = hasFlexibelDetent
         self.detents = detents
         self.dragIndicator = dragIndicator
         self.root = root
@@ -186,9 +191,13 @@ public struct NavigationRootSheetNoDestination<R>: View where R: View {
             }, content: {
                 NavigationStack(path: $navigation.paths[navigation.index]) {
                     root()
+                        .readSize { size in
+                            felxibleSheetSize = size
+                        }
                 }
-                .presentationDetents(detents)
+                .presentationDetents(hasFlexibelDetent ? [.height(felxibleSheetSize.height)] : detents)
                 .presentationDragIndicator(dragIndicator)
+                
             })
     }
     
@@ -310,11 +319,19 @@ public extension View {
     }
     
     func sheet<R>(_ path: Navigation.SheetPath,
-                        detents: Set<PresentationDetent> = [],
-                        dragIndicator: Visibility = .hidden,
-                        _ root: @escaping () -> R,
-                        onDismiss: (() -> Void)? = nil) -> some View where R: View {
-        modifier(NavigationRootSheetNoDestinationModifier(path: path, detents: detents, dragIndicator: dragIndicator, root, onDismiss: onDismiss))
+                  detents: Set<PresentationDetent> = [],
+                  dragIndicator: Visibility = .hidden,
+                  _ root: @escaping () -> R,
+                  onDismiss: (() -> Void)? = nil) -> some View where R: View {
+        modifier(NavigationRootSheetNoDestinationModifier(path: path, hasFlexibleDetents: false, detents: detents, dragIndicator: dragIndicator, root, onDismiss: onDismiss))
+    }
+    
+    func sheet<R>(_ path: Navigation.SheetPath,
+                  hasFlexibleDetents: Bool = true,
+                  dragIndicator: Visibility = .hidden,
+                  _ root: @escaping () -> R,
+                  onDismiss: (() -> Void)? = nil) -> some View where R: View {
+        modifier(NavigationRootSheetNoDestinationModifier(path: path, hasFlexibleDetents: hasFlexibleDetents, detents: [], dragIndicator: dragIndicator, root, onDismiss: onDismiss))
     }
 }
 
@@ -355,17 +372,20 @@ public struct NavigationRootSheetModifier<R, D, C>: ViewModifier where R: View, 
 public struct NavigationRootSheetNoDestinationModifier<R>: ViewModifier where R: View {
     
     var path: Navigation.SheetPath
+    var hasFlexibleDetents: Bool
     var detents: Set<PresentationDetent> = []
     var dragIndicator: Visibility = .hidden
     var root: () -> R
     var onDismiss: (() -> Void)?
     
     public init(path: Navigation.SheetPath,
+                hasFlexibleDetents: Bool,
                 detents: Set<PresentationDetent> = [],
                 dragIndicator: Visibility = .hidden,
                 _ root: @escaping () -> R,
                 onDismiss: (() -> Void)? = nil) {
         self.path = path
+        self.hasFlexibleDetents = hasFlexibleDetents
         self.detents = detents
         self.dragIndicator = dragIndicator
         self.root = root
@@ -375,7 +395,7 @@ public struct NavigationRootSheetNoDestinationModifier<R>: ViewModifier where R:
     public func body(content: Content) -> some View {
         content
             .background(
-                NavigationRootSheetNoDestination<R>(path: path, detents: detents, dragIndicator: dragIndicator, root, onDismiss: onDismiss)
+                NavigationRootSheetNoDestination<R>(path: path, hasFlexibelDetent: hasFlexibleDetents, detents: detents, dragIndicator: dragIndicator, root, onDismiss: onDismiss)
             )
     }
 }

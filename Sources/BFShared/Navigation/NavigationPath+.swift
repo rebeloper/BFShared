@@ -21,7 +21,7 @@ public extension NavigationPath {
     ///   - value: The value to push.
     mutating func push<V>(_ value: V, completion: @escaping () -> () = {}) where V : Hashable {
         append(value)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6, execute: {
             completion()
         })
     }
@@ -81,7 +81,7 @@ public extension NavigationPath {
     
     mutating private func removeLast(last: Int, completion: @escaping () -> () = {}) {
         removeLast(min(last, count))
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6, execute: {
             completion()
         })
     }
