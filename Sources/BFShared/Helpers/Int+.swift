@@ -9,15 +9,16 @@ import Foundation
 
 public extension Int {
     func toStripeDouble() -> Double {
-        let double = Double(self)
-        if self % 100 == 0 {
-            return Double(Int(double / 100))
-        } else {
-            return double / 100
-        }
+        Double(self) / 100
     }
     
     func toStripeString(currency: String = "$ ") -> String {
-        "\(currency)\(self.toStripeDouble().convert(maxDecimals: 2))"
+        if self % 10 == 0 {
+            return "\(currency)\(self / 10).0"
+        } else if self % 100 == 0 {
+            return "\(currency)\(self / 100).00"
+        } else {
+            return "\(currency)\(self.toStripeDouble().convert(maxDecimals: 2))"
+        }
     }
 }
