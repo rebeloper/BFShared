@@ -63,5 +63,10 @@ public class ProfileService: ObservableObject {
     public func createTemplateProduct(size: TemplateProductSize) async throws {
         try await FirestoreManager.create(size, atPath: Path.Firestore.templateProductSizes)
     }
+    
+    @MainActor
+    public func fetchTemplateProductSizes() async throws -> [TemplateProductSize] {
+        try await FirestoreManager.read(atPath: Path.Firestore.templateProductSizes)
+    }
 }
 
