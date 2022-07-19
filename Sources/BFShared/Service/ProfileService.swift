@@ -59,24 +59,26 @@ public class ProfileService: ObservableObject {
         merchant = try await FirestoreManager.read(atPath: Path.Firestore.merchants, uid: uid)
     }
     
+    // MARK: - Template Product Option
     @MainActor
-    public func createTemplateProduct(size: TemplateProductSize) async throws {
-        try await FirestoreManager.create(size, atPath: Path.Firestore.templateProductSizes)
+    public func createTemplateProduct(option: TemplateProductOption) async throws {
+        try await FirestoreManager.create(option, atPath: Path.Firestore.templateProductOptions)
     }
     
     @MainActor
-    public func fetchTemplateProductSizes() async throws -> [TemplateProductSize] {
-        try await FirestoreManager.read(atPath: Path.Firestore.templateProductSizes)
+    public func fetchTemplateProductOptions(_ type: TemplateProductOptionType) async throws -> [TemplateProductOption] {
+        let queryItem = QueryItem("type", .isEqualTo, type.rawValue)
+        return try await FirestoreManager.query(path: Path.Firestore.templateProductOptions, queryItems: [queryItem])
     }
     
     @MainActor
-    public func deleteTemplateProduct(size: TemplateProductSize) async throws {
-        try await FirestoreManager.delete(size, atPath: Path.Firestore.templateProductSizes)
+    public func deleteTemplateProduct(option: TemplateProductOption) async throws {
+        try await FirestoreManager.delete(option, atPath: Path.Firestore.templateProductOptions)
     }
     
     @MainActor
-    public func updateTemplateProduct(size: TemplateProductSize) async throws {
-        try await FirestoreManager.update(size, atPath: Path.Firestore.templateProductSizes)
+    public func updateTemplateProduct(option: TemplateProductOption) async throws {
+        try await FirestoreManager.update(option, atPath: Path.Firestore.templateProductOptions)
     }
 }
 
