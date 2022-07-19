@@ -11,7 +11,7 @@ import BetterCodable
 import Firebase
 import FirebaseFirestoreSwift
 
-public struct MerchantStripeAccount: Codable {
+public struct MerchantStripeAccount: Codable, Hashable {
     
     @DefaultEmptyString public var merchantId: String
     @DefaultZeroInt public var serviceFeePercentage: Int

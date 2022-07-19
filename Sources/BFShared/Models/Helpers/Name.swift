@@ -11,7 +11,7 @@ import BetterCodable
 import Firebase
 import FirebaseFirestoreSwift
 
-public struct Name: Codable {
+public struct Name: Codable, Hashable {
     
     @DefaultEmptyString public var first: String
     @DefaultEmptyString public var last: String

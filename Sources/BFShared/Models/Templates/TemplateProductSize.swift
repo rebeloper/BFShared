@@ -12,7 +12,7 @@ import Firebase
 import FirebaseFirestoreSwift
 
 // a template for product size that can be used when creating a product
-public struct TemplateProductSize: Codable, Identifiable, Firestorable {
+public struct TemplateProductSize: Codable, Identifiable, Firestorable, Hashable {
     
     @DocumentID public var id: String?
     @DefaultEmptyString public var uid: String

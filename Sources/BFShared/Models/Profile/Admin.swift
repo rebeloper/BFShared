@@ -12,7 +12,7 @@ import BetterCodable
 import Firebase
 import FirebaseFirestoreSwift
 
-public struct Admin: Codable, Identifiable, Firestorable {
+public struct Admin: Codable, Identifiable, Firestorable, Hashable {
     
     @DocumentID public var id: String?
     @DefaultEmptyString public var uid: String

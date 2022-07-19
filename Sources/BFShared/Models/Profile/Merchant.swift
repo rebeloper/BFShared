@@ -11,7 +11,7 @@ import BetterCodable
 import Firebase
 import FirebaseFirestoreSwift
 
-public struct Merchant: Codable, Identifiable, Firestorable {
+public struct Merchant: Codable, Identifiable, Firestorable, Hashable {
     
     @DocumentID public var id: String?
     @DefaultEmptyString public var uid: String
