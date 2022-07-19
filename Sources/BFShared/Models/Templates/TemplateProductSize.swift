@@ -19,8 +19,6 @@ public struct TemplateProductSize: Codable, Identifiable, Firestorable, Hashable
     @DefaultTimestamp public var createdAt: Timestamp
     @DefaultEmptyString public var name: String
     @DefaultZeroInt public var price: Int
-    @DefaultFalse public var isAvailable: Bool
-    @DefaultFalse public var isChecked: Bool
     
     public init(uid: String? = nil,
          createdAt: Timestamp? = nil,
@@ -32,8 +30,6 @@ public struct TemplateProductSize: Codable, Identifiable, Firestorable, Hashable
         self.createdAt = createdAt ?? Timestamp()
         self.name = name ?? ""
         self.price = price ?? 0
-        self.isAvailable = isAvailable ?? false
-        self.isChecked = isChecked ?? false
     }
     
 }
