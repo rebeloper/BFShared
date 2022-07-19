@@ -13,14 +13,18 @@ public extension Int {
     }
     
     func toStripeString(currency: String = "$ ") -> String {
-        if self % 10 == 0 {
-            if self % 100 == 0 {
-                return "\(currency)\(self / 100).00"
-            } else {
-                return "\(currency)\(self.toStripeDouble().convert(maxDecimals: 1))0"
-            }
+        if self == 0 {
+            return "FREE"
         } else {
-            return "\(currency)\(self.toStripeDouble().convert(maxDecimals: 2))"
+            if self % 10 == 0 {
+                if self % 100 == 0 {
+                    return "\(currency)\(self / 100).00"
+                } else {
+                    return "\(currency)\(self.toStripeDouble().convert(maxDecimals: 1))0"
+                }
+            } else {
+                return "\(currency)\(self.toStripeDouble().convert(maxDecimals: 2))"
+            }
         }
     }
 }
