@@ -33,7 +33,7 @@ public struct NavigationRoot<R, D, C>: View where R: View, D : Hashable, C : Vie
     }
 }
 
-extension View {
+public extension View {
     func asNavigationRoot<D, C>(navigation: Navigation,
                               with data: D.Type,
                               @ViewBuilder destination: @escaping (D) -> C) -> some View where D : Hashable, C : View {
