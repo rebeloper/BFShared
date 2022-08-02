@@ -17,6 +17,7 @@ public struct Merchant: Codable, Identifiable, Firestorable, Hashable {
     @DefaultEmptyString public var uid: String
     @DefaultTimestamp public var createdAt: Timestamp
     @DefaultEmptyName public var name: Name
+    @DefaultEmptyString public var displayName: String
     @DefaultEmptyAddress public var address: Address
     @DefaultZeroDouble public var latitude: Double
     @DefaultZeroDouble public var longitude: Double
@@ -33,25 +34,27 @@ public struct Merchant: Codable, Identifiable, Firestorable, Hashable {
     @DefaultEmptyArray public var tags: [String]
     
     public init(uid: String? = nil,
-         createdAt: Timestamp? = nil,
-         name: Name? = nil,
-         address: Address? = nil,
-         latitude: Double? = nil,
-         longitude: Double? = nil,
-         geoHash: String? = nil,
-         stripeAccount: MerchantStripeAccount? = nil,
-         role: Int? = nil,
-         companyName: String? = nil,
-         phone: String? = nil,
-         description: String? = nil,
-         fcmToken: String? = nil,
-         profileImageUrl: String? = nil,
-         status: Int? = nil,
-         merchantCategoryUids: [String]? = nil,
-         tags: [String]? = nil) {
+                createdAt: Timestamp? = nil,
+                name: Name? = nil,
+                displayName: String? = nil,
+                address: Address? = nil,
+                latitude: Double? = nil,
+                longitude: Double? = nil,
+                geoHash: String? = nil,
+                stripeAccount: MerchantStripeAccount? = nil,
+                role: Int? = nil,
+                companyName: String? = nil,
+                phone: String? = nil,
+                description: String? = nil,
+                fcmToken: String? = nil,
+                profileImageUrl: String? = nil,
+                status: Int? = nil,
+                merchantCategoryUids: [String]? = nil,
+                tags: [String]? = nil) {
         self.uid = uid ?? ""
         self.createdAt = createdAt ?? Timestamp()
         self.name = name ?? Name()
+        self.displayName = displayName ?? ""
         self.address = address ?? Address()
         self.latitude = latitude ?? 0
         self.longitude = longitude ?? 0
