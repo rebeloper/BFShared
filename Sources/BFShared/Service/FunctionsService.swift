@@ -10,7 +10,7 @@ import FirebaseFunctions
 import FirebaseService
 
 public enum CallableFunctionName: String {
-    case sendCreateUser = "sendCreateUser"
+    case createUser = "createUser"
     case sendPushNotification = "sendPushNotification"
 }
 
@@ -19,13 +19,14 @@ public class FunctionsService: ObservableObject {
     public init() {}
     
     @discardableResult
-    public func callCreateUser(email: String, password: String) async throws -> HTTPSCallableResult {
+    public func callCreateUser(displayName: String, email: String, password: String) async throws -> HTTPSCallableResult {
         let data = [
+            "displayName": displayName,
             "email": email,
             "password": password
         ]
         
-        return try await CallableFunctionsService.call(CallableFunctionName.sendCreateUser.rawValue, data: data)
+        return try await CallableFunctionsService.call(CallableFunctionName.createUser.rawValue, data: data)
     }
 
     @discardableResult
