@@ -8,7 +8,7 @@
 import Foundation
 
 public enum TemplateProductOptionType: Int {
-    case none = 0
+    case invalid = 0
     case size = 1
     case flavor = 2
     case topping = 3
