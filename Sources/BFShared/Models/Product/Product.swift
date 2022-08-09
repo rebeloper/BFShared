@@ -27,15 +27,15 @@ public struct Product: Codable, Identifiable, Firestorable, Hashable {
     @DefaultZeroInt public var maxFlavorsCount: Int
     
     public init(uid: String? = nil,
-         createdAt: Timestamp? = nil,
-         name: String? = nil,
-         description: String? = nil,
-         merchantUid: String? = nil,
-         productImageUrl: String? = nil,
-         instructions: String? = nil,
-         isAvailable: Bool? = nil,
-         price: Int? = nil,
-         maxFlavorsCount: Int? = nil) {
+                createdAt: Timestamp? = nil,
+                name: String? = nil,
+                description: String? = nil,
+                merchantUid: String? = nil,
+                productImageUrl: String? = nil,
+                instructions: String? = nil,
+                isAvailable: Bool? = nil,
+                price: Int? = nil,
+                maxFlavorsCount: Int? = nil) {
         self.uid = uid ?? ""
         self.createdAt = createdAt ?? Timestamp()
         self.name = name ?? ""

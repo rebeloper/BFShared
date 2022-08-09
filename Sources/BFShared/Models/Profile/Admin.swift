@@ -5,7 +5,6 @@
 //  Created by Alex Nagy on 04.07.2022.
 //
 
-
 import SwiftUI
 import FirebaseService
 import BetterCodable

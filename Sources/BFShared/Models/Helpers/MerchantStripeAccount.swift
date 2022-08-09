@@ -17,7 +17,7 @@ public struct MerchantStripeAccount: Codable, Hashable {
     @DefaultZeroInt public var serviceFeePercentage: Int
     
     public init(merchantId: String? = nil,
-         serviceFeePercentage: Int? = nil) {
+                serviceFeePercentage: Int? = nil) {
         self.merchantId = merchantId ?? ""
         self.serviceFeePercentage = serviceFeePercentage ?? 0
     }

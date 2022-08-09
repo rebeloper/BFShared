@@ -20,10 +20,10 @@ public struct Address: Codable, Hashable {
     @DefaultEmptyString public var country: String
     
     public init(line1: String? = nil,
-         line2: String? = nil,
-         city: String? = nil,
-         state: String? = nil,
-         country: String? = nil) {
+                line2: String? = nil,
+                city: String? = nil,
+                state: String? = nil,
+                country: String? = nil) {
         self.line1 = line1 ?? ""
         self.line2 = line2 ?? ""
         self.city = city ?? ""

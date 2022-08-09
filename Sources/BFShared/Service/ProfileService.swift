@@ -101,5 +101,10 @@ public class ProfileService: ObservableObject {
     public func delete(product: Product) async throws {
         let _ = try await FirestoreManager.delete(product, atPath: Path.Firestore.products)
     }
+    
+    @MainActor
+    public func create(product: Product) async throws {
+        let _ = try await FirestoreManager.create(product, atPath: Path.Firestore.products)
+    }
 }
 

@@ -17,7 +17,7 @@ public struct Name: Codable, Hashable {
     @DefaultEmptyString public var last: String
     
     public init(first: String? = nil,
-         last: String? = nil) {
+                last: String? = nil) {
         self.first = first ?? ""
         self.last = last ?? ""
     }
