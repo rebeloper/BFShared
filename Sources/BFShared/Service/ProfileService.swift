@@ -90,5 +90,11 @@ public class ProfileService: ObservableObject {
     public func updateMerchant(_ merchant: Merchant) async throws {
         let _ = try await FirestoreManager.update(merchant, atPath: Path.Firestore.merchants)
     }
+    
+    @MainActor
+    public func fetchProducts(for merchant: Merchant) async throws -> [Product] {
+        let queryItem = QueryItem("merchantUid", .isEqualTo, merchant.uid)
+        return try await FirestoreManager.query(path: Path.Firestore.products)
+    }
 }
 

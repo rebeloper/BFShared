@@ -12,21 +12,21 @@ import Firebase
 import FirebaseFirestoreSwift
 
 // a product that is created by the Admin for a particular merchant
-struct Product: Codable, Identifiable, Firestorable, Hashable {
+public struct Product: Codable, Identifiable, Firestorable, Hashable {
     
-    @DocumentID var id: String?
-    @DefaultEmptyString var uid: String
-    @DefaultTimestamp var createdAt: Timestamp
-    @DefaultEmptyString var name: String
-    @DefaultEmptyString var description: String
-    @DefaultEmptyString var merchantUid: String
-    @DefaultEmptyString var productImageUrl: String
-    @DefaultEmptyString var instructions: String
-    @DefaultFalse var isAvailable: Bool
-    @DefaultZeroInt var price: Int
-    @DefaultZeroInt var maxFlavorsCount: Int
+    @DocumentID public var id: String?
+    @DefaultEmptyString public var uid: String
+    @DefaultTimestamp public var createdAt: Timestamp
+    @DefaultEmptyString public var name: String
+    @DefaultEmptyString public var description: String
+    @DefaultEmptyString public var merchantUid: String
+    @DefaultEmptyString public var productImageUrl: String
+    @DefaultEmptyString public var instructions: String
+    @DefaultFalse public var isAvailable: Bool
+    @DefaultZeroInt public var price: Int
+    @DefaultZeroInt public var maxFlavorsCount: Int
     
-    init(uid: String? = nil,
+    public init(uid: String? = nil,
          createdAt: Timestamp? = nil,
          name: String? = nil,
          description: String? = nil,
@@ -50,10 +50,10 @@ struct Product: Codable, Identifiable, Firestorable, Hashable {
     
 }
 
-struct DefaultProductStrategy: DefaultCodableStrategy {
-    static var defaultValue: Product { return Product() }
+public struct DefaultProductStrategy: DefaultCodableStrategy {
+    public static var defaultValue: Product { return Product() }
 }
 
-typealias DefaultEmptyProduct = DefaultCodable<DefaultProductStrategy>
+public typealias DefaultEmptyProduct = DefaultCodable<DefaultProductStrategy>
 
 

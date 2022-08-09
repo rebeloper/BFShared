@@ -15,6 +15,8 @@ public struct Path {
         public static let customers = "customers"
         
         public static let templateProductOptions = "templateProductOptions"
+        
+        public static let products = "products"
     }
     
 }
