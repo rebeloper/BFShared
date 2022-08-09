@@ -96,5 +96,10 @@ public class ProfileService: ObservableObject {
         let queryItem = QueryItem("merchantUid", .isEqualTo, merchant.uid)
         return try await FirestoreManager.query(path: Path.Firestore.products, queryItems: [queryItem])
     }
+    
+    @MainActor
+    public func delete(product: Product) async throws {
+        let _ = try await FirestoreManager.delete(product, atPath: Path.Firestore.products)
+    }
 }
 
