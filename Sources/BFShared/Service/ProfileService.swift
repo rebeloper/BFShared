@@ -87,7 +87,7 @@ public class ProfileService: ObservableObject {
     }
     
     @MainActor
-    public func updateMerchant(_ merchant: Merchant) async throws {
+    public func update(merchant: Merchant) async throws {
         let _ = try await FirestoreManager.update(merchant, atPath: Path.Firestore.merchants)
     }
     
@@ -105,6 +105,11 @@ public class ProfileService: ObservableObject {
     @MainActor
     public func create(product: Product) async throws {
         let _ = try await FirestoreManager.create(product, atPath: Path.Firestore.products)
+    }
+    
+    @MainActor
+    public func update(product: Product) async throws {
+        let _ = try await FirestoreManager.update(product, atPath: Path.Firestore.products)
     }
 }
 
