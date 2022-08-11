@@ -21,6 +21,9 @@ public class FunctionsService: ObservableObject {
     @discardableResult
     public func callCreateUser(email: String,
                                password: String,
+                               latitude: Double,
+                               longitude: Double,
+                               geoHash: String,
                                firstName: String,
                                lastName: String,
                                companyName: String,
@@ -31,13 +34,16 @@ public class FunctionsService: ObservableObject {
             "displayName": "\(firstName) \(lastName)",
             "email": email,
             "password": password,
+            "latitude": latitude,
+            "longitude": longitude,
+            "geoHash": geoHash,
             "firstName": firstName,
             "lastName": lastName,
             "companyName": companyName,
             "phone": phone,
             "description": description,
             "tags": tags
-        ]
+        ] as [String : Any]
         
         return try await CallableFunctionsService.call(CallableFunctionName.createUser.rawValue, data: data)
     }
