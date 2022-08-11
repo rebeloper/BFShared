@@ -26,7 +26,7 @@ public struct Merchant: Codable, Identifiable, Firestorable, Hashable {
     @DefaultEmptyString public var description: String
     @DefaultEmptyString public var fcmToken: String
     @DefaultEmptyString public var profileImageUrl: String
-    @DefaultEmptyArray public var tags: [String]
+    @DefaultEmptyString public var tags: String
     
     public init(uid: String? = nil,
                 createdAt: Timestamp? = nil,
@@ -40,7 +40,7 @@ public struct Merchant: Codable, Identifiable, Firestorable, Hashable {
                 description: String? = nil,
                 fcmToken: String? = nil,
                 profileImageUrl: String? = nil,
-                tags: [String]? = nil) {
+                tags: String? = nil) {
         self.uid = uid ?? ""
         self.createdAt = createdAt ?? Timestamp()
         self.name = name ?? Name()
@@ -53,7 +53,7 @@ public struct Merchant: Codable, Identifiable, Firestorable, Hashable {
         self.description = description ?? ""
         self.fcmToken = fcmToken ?? ""
         self.profileImageUrl = profileImageUrl ?? ""
-        self.tags = tags ?? []
+        self.tags = tags ?? ""
     }
     
 }
