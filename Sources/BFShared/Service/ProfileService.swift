@@ -95,5 +95,10 @@ public class ProfileService: ObservableObject {
     public func update(product: Product) async throws {
         let _ = try await FirestoreManager.update(product, atPath: Path.Firestore.products)
     }
+    
+    @MainActor
+    public func saveMerchantProfile(image: UIImage) async throws -> URL {
+        try await StorageService.save(image: image, folderPath: Path.Storage.merchantProfileImages, compressionQuality: 0.5)
+    }
 }
 

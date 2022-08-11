@@ -19,4 +19,8 @@ public struct Path {
         public static let products = "products"
     }
     
+    public struct Storage {
+        public static let merchantProfileImages = "merchantProfileImages"
+    }
+    
 }
