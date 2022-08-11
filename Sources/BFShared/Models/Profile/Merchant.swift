@@ -53,7 +53,6 @@ public struct Merchant: Codable, Identifiable, Firestorable, Hashable {
         self.createdAt = createdAt ?? Timestamp()
         self.name = name ?? Name()
         self.displayName = displayName ?? ""
-        self.address = address ?? Address()
         self.latitude = latitude ?? 0
         self.longitude = longitude ?? 0
         self.geoHash = geoHash ?? ""
