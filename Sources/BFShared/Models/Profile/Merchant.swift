@@ -18,7 +18,6 @@ public struct Merchant: Codable, Identifiable, Firestorable, Hashable {
     @DefaultTimestamp public var createdAt: Timestamp
     @DefaultEmptyName public var name: Name
     @DefaultEmptyString public var displayName: String
-    @DefaultEmptyAddress public var address: Address
     @DefaultZeroDouble public var latitude: Double
     @DefaultZeroDouble public var longitude: Double
     @DefaultEmptyString public var geoHash: String
@@ -37,7 +36,6 @@ public struct Merchant: Codable, Identifiable, Firestorable, Hashable {
                 createdAt: Timestamp? = nil,
                 name: Name? = nil,
                 displayName: String? = nil,
-                address: Address? = nil,
                 latitude: Double? = nil,
                 longitude: Double? = nil,
                 geoHash: String? = nil,
