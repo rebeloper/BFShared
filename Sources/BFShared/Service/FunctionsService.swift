@@ -21,6 +21,7 @@ public class FunctionsService: ObservableObject {
     @discardableResult
     public func callCreateUser(email: String,
                                password: String,
+                               profileImageUrl: String,
                                latitude: Double,
                                longitude: Double,
                                geoHash: String,
@@ -34,6 +35,7 @@ public class FunctionsService: ObservableObject {
             "displayName": "\(firstName) \(lastName)",
             "email": email,
             "password": password,
+            "profileImageUrl": profileImageUrl,
             "latitude": latitude,
             "longitude": longitude,
             "geoHash": geoHash,
