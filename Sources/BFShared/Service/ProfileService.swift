@@ -97,8 +97,8 @@ public class ProfileService: ObservableObject {
     }
     
     @MainActor
-    public func saveMerchantProfile(image: UIImage) async throws -> URL {
-        try await StorageService.save(image: image, folderPath: Path.Storage.merchantProfileImages, compressionQuality: 0.5)
+    public func saveMerchantProfile(image: UIImage, oldImageUrl: String) async throws -> URL {
+        try await StorageService.handleImageChange(newImage: image, folderPath: Path.Storage.merchantProfileImages, compressionQuality: 0.5, oldImageUrl: oldImageUrl)
     }
 }
 
