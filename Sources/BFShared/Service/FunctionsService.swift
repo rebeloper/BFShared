@@ -19,11 +19,24 @@ public class FunctionsService: ObservableObject {
     public init() {}
     
     @discardableResult
-    public func callCreateUser(displayName: String, email: String, password: String) async throws -> HTTPSCallableResult {
+    public func callCreateUser(email: String,
+                               password: String,
+                               firstName: String,
+                               lastName: String,
+                               companyName: String,
+                               phone: String,
+                               description: String,
+                               tags: String) async throws -> HTTPSCallableResult {
         let data = [
-            "displayName": displayName,
+            "displayName": "\(firstName) \(lastName)",
             "email": email,
-            "password": password
+            "password": password,
+            "firstName": firstName,
+            "lastName": lastName,
+            "companyName": companyName,
+            "phone": phone,
+            "description": description,
+            "tags": tags
         ]
         
         return try await CallableFunctionsService.call(CallableFunctionName.createUser.rawValue, data: data)
