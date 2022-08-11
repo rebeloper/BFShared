@@ -59,28 +59,6 @@ public class ProfileService: ObservableObject {
         merchant = try await FirestoreManager.read(atPath: Path.Firestore.merchants, uid: uid)
     }
     
-    // MARK: - Template Product Option
-    @MainActor
-    public func createTemplateProduct(option: TemplateProductOption) async throws {
-        let _ = try await FirestoreManager.create(option, atPath: Path.Firestore.templateProductOptions)
-    }
-    
-    @MainActor
-    public func fetchTemplateProductOptions(_ type: TemplateProductOptionType) async throws -> [TemplateProductOption] {
-        let queryItem = QueryItem("type", .isEqualTo, type.rawValue)
-        return try await FirestoreManager.query(path: Path.Firestore.templateProductOptions, queryItems: [queryItem])
-    }
-    
-    @MainActor
-    public func deleteTemplateProduct(option: TemplateProductOption) async throws {
-        let _ = try await FirestoreManager.delete(option, atPath: Path.Firestore.templateProductOptions)
-    }
-    
-    @MainActor
-    public func updateTemplateProduct(option: TemplateProductOption) async throws {
-        let _ = try await FirestoreManager.update(option, atPath: Path.Firestore.templateProductOptions)
-    }
-    
     @MainActor
     public func fetchMerchants() async throws -> [Merchant] {
         return try await FirestoreManager.query(path: Path.Firestore.merchants)
