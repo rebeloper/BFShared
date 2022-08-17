@@ -116,5 +116,14 @@ public class ProfileService: ObservableObject {
     public func create(order: Order) async throws {
         let _ = try await FirestoreManager.create(order, atPath: Path.Firestore.orders)
     }
+    
+    @MainActor
+    public func fetchOrders(for merchant: Merchant, status: OrderStatus) async throws -> [Order] {
+        let queryItems = [
+            QueryItem("status", .isEqualTo, status.rawValue),
+            QueryItem("merchantUid", .isEqualTo, merchant.uid)
+        ]
+        return try await FirestoreManager.query(path: Path.Firestore.orders, queryItems: queryItems)
+    }
 }
 
