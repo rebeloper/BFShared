@@ -8,5 +8,5 @@
 import Foundation
 
 public enum OrderStatus: Int {
-    case none = 0, ordered, inReview, preparing, readyForPickup, completed
+    case defaultValue = 0, ordered, inReview, preparing, readyForPickup, completed
 }
