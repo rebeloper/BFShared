@@ -66,7 +66,7 @@ public class ProfileService: ObservableObject {
     
     @MainActor
     public func fetchMerchants(geoHash: String) async throws -> [Merchant] {
-        let queryItem = QueryItem("geoHash", .isEqualTo, merchant.geoHash)
+        let queryItem = QueryItem("geoHash", .isEqualTo, geoHash)
         return try await FirestoreManager.query(path: Path.Firestore.merchants, queryItems: [queryItem])
     }
     
