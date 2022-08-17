@@ -100,5 +100,10 @@ public class ProfileService: ObservableObject {
     public func saveMerchantProfile(image: UIImage, oldImageUrl: String) async throws -> URL {
         try await StorageService.handleImageChange(newImage: image, folderPath: Path.Storage.merchantProfileImages, compressionQuality: 0.5, oldImageUrl: oldImageUrl)
     }
+    
+    @MainActor
+    public func create(order: Order) async throws {
+        let _ = try await FirestoreManager.create(order, atPath: Path.Firestore.orders)
+    }
 }
 

@@ -17,6 +17,7 @@ public struct Path {
         public static let templateProductOptions = "templateProductOptions"
         
         public static let products = "products"
+        public static let orders = "orders"
     }
     
     public struct Storage {
