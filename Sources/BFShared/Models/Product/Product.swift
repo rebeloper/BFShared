@@ -11,7 +11,6 @@ import BetterCodable
 import Firebase
 import FirebaseFirestoreSwift
 
-// a product that is created by the Admin for a particular merchant
 public struct Product: Codable, Identifiable, Firestorable, Hashable {
     
     @DocumentID public var id: String?
