@@ -87,7 +87,7 @@ public class ProfileService: ObservableObject {
     public func fetchAvailableProducts(for merchant: Merchant) async throws -> [Product] {
         let queryItems = [
             QueryItem("merchantUid", .isEqualTo, merchant.uid),
-            QueryItem("isAvailable", .isEqualTo, true)
+            QueryItem("isAvailable", .isNotEqualTo, false)
         ]
         return try await FirestoreManager.query(path: Path.Firestore.products, queryItems: queryItems)
     }
