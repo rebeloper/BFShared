@@ -20,7 +20,6 @@ public struct Product: Codable, Identifiable, Firestorable, Hashable {
     @DefaultEmptyString public var description: String
     @DefaultEmptyString public var merchantUid: String
     @DefaultEmptyString public var productImageUrl: String
-    @DefaultEmptyString public var instructions: String
     @DefaultFalse public var isAvailable: Bool
     @DefaultZeroInt public var price: Int
     @DefaultZeroInt public var maxFlavorsCount: Int
@@ -31,7 +30,6 @@ public struct Product: Codable, Identifiable, Firestorable, Hashable {
                 description: String? = nil,
                 merchantUid: String? = nil,
                 productImageUrl: String? = nil,
-                instructions: String? = nil,
                 isAvailable: Bool? = nil,
                 price: Int? = nil,
                 maxFlavorsCount: Int? = nil) {
@@ -41,7 +39,6 @@ public struct Product: Codable, Identifiable, Firestorable, Hashable {
         self.description = description ?? ""
         self.merchantUid = merchantUid ?? ""
         self.productImageUrl = productImageUrl ?? ""
-        self.instructions = instructions ?? ""
         self.isAvailable = isAvailable ?? false
         self.price = price ?? 0
         self.maxFlavorsCount = maxFlavorsCount ?? 0

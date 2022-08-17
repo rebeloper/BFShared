@@ -19,6 +19,7 @@ public struct Order: Codable, Identifiable, Firestorable, Hashable {
     @DefaultEmptyString public var customerUid: String
     @DefaultEmptyString public var merchantUid: String
     @DefaultEmptyArray public var products: [Product]
+    @DefaultEmptyString public var instructions: String
     @DefaultZeroInt public var status: Int
     
     public init(uid: String? = nil,
@@ -26,12 +27,14 @@ public struct Order: Codable, Identifiable, Firestorable, Hashable {
                 customerUid: String? = nil,
                 merchantUid: String? = nil,
                 products: [Product]? = nil,
+                instructions: String? = nil,
                 status: Int? = nil) {
         self.uid = uid ?? ""
         self.createdAt = createdAt ?? Timestamp()
         self.customerUid = customerUid ?? ""
         self.merchantUid = merchantUid ?? ""
         self.products = products ?? []
+        self.instructions = instructions ?? ""
         self.status = status ?? 0
     }
     
