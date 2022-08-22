@@ -185,35 +185,6 @@ public class ProfileService: ObservableObject {
         try await update(chatRoom: chatRoom)
     }
     
-//    @MainActor
-//    public func listenToChatMessages(for chatRoom: ChatRoom) async throws -> [ChatMessage] {
-//        let queryItems = [
-//            QueryItem("adminUid", .isEqualTo, chatRoom.adminUid),
-//            QueryItem("merchantUid", .isEqualTo, chatRoom.merchantUid)
-//        ]
-//        return try await withCheckedThrowingContinuation({ continuation in
-//            FirestoreManager<ChatMessage>.listenTo(Path.Firestore.chatMessages, queryItems: queryItems).sink { result in
-//                switch result {
-//                case .finished:
-//                    break
-//                case .failure(let err):
-//                    continuation.resume(throwing: err)
-//                }
-//            } receiveValue: { chatMessages in
-//                continuation.resume(returning: chatMessages)
-//            }.store(in: &cancellables)
-//        })
-//    }
-    
-    @MainActor
-    public func listenToChatMessages(for chatRoom: ChatRoom) async throws -> [ChatMessage] {
-        return try await withCheckedThrowingContinuation({ continuation in
-            listenToChatMessages(for: chatRoom) { result in
-                continuation.resume(with: result)
-            }
-        })
-    }
-    
     @MainActor
     public func listenToChatMessages(for chatRoom: ChatRoom, completion: @escaping (Result<[ChatMessage], Error>) -> ()) {
         let queryItems = [
