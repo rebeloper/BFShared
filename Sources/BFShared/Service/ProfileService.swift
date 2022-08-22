@@ -140,5 +140,10 @@ public class ProfileService: ObservableObject {
     public func update(order: Order) async throws {
         let _ = try await FirestoreManager.update(order, atPath: Path.Firestore.orders)
     }
+    
+    @MainActor
+    public func create(chatRoom: ChatRoom) async throws {
+        let _ = try await FirestoreManager.create(chatRoom, atPath: Path.Firestore.chatRooms)
+    }
 }
 

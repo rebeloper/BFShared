@@ -18,6 +18,8 @@ public struct Path {
         
         public static let products = "products"
         public static let orders = "orders"
+        
+        public static let chatRooms = "chatRooms"
     }
     
     public struct Storage {
