@@ -9,6 +9,7 @@ import SwiftUI
 import FirebaseService
 import FirebaseAuth
 import FirebaseFirestore
+import Combine
 
 public class ProfileService: ObservableObject {
     
@@ -17,6 +18,8 @@ public class ProfileService: ObservableObject {
     @Published public var admin = Admin()
     @Published public var customer = Customer()
     @Published public var merchant = Merchant()
+    
+    public var cancellables: Set<AnyCancellable> = []
     
     public func signIn(withEmail email: String, password: String) async throws {
         try await Auth.auth().signIn(withEmail: email, password: password)
@@ -183,12 +186,23 @@ public class ProfileService: ObservableObject {
     }
     
     @MainActor
-    public func fetchChatMessages(for chatRoom: ChatRoom) async throws -> [ChatMessage] {
+    public func listenToChatMessages(for chatRoom: ChatRoom) async throws -> [ChatMessage] {
         let queryItems = [
             QueryItem("adminUid", .isEqualTo, chatRoom.adminUid),
             QueryItem("merchantUid", .isEqualTo, chatRoom.merchantUid)
         ]
-        return try await FirestoreManager.query(path: Path.Firestore.chatMessages, queryItems: queryItems)
+        return try await withCheckedThrowingContinuation({ continuation in
+            FirestoreManager<ChatMessage>.listenTo(Path.Firestore.chatMessages, queryItems: queryItems).sink { result in
+                switch result {
+                case .finished:
+                    break
+                case .failure(let err):
+                    continuation.resume(throwing: err)
+                }
+            } receiveValue: { chatMessages in
+                continuation.resume(returning: chatMessages)
+            }.store(in: &cancellables)
+        })
     }
 }
 
