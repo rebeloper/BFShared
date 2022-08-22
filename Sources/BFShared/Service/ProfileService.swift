@@ -8,6 +8,7 @@
 import SwiftUI
 import FirebaseService
 import FirebaseAuth
+import FirebaseFirestore
 
 public class ProfileService: ObservableObject {
     
@@ -160,8 +161,12 @@ public class ProfileService: ObservableObject {
     }
     
     @MainActor
-    public func create(chatMessage: ChatMessage) async throws {
+    public func create(chatMessage: ChatMessage, chatRoom: ChatRoom) async throws {
         let _ = try await FirestoreManager.create(chatMessage, atPath: Path.Firestore.chatMessages)
+        var chatRoom = chatRoom
+        chatRoom.updatedAt = Timestamp()
+        chatRoom.lastMessage = chatMessage.text
+        try await update(chatRoom: chatRoom)
     }
     
     @MainActor
