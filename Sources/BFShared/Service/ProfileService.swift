@@ -145,5 +145,13 @@ public class ProfileService: ObservableObject {
     public func create(chatRoom: ChatRoom) async throws {
         let _ = try await FirestoreManager.create(chatRoom, atPath: Path.Firestore.chatRooms)
     }
+    
+    @MainActor
+    public func fetchChatRooms(for admin: Admin) async throws -> [ChatRoom] {
+        let queryItems = [
+            QueryItem("adminUid", .isEqualTo, admin.uid)
+        ]
+        return try await FirestoreManager.query(path: Path.Firestore.chatRooms, queryItems: queryItems)
+    }
 }
 
