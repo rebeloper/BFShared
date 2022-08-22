@@ -20,6 +20,7 @@ public struct Path {
         public static let orders = "orders"
         
         public static let chatRooms = "chatRooms"
+        public static let chatMessages = "chatMessages"
     }
     
     public struct Storage {
