@@ -185,24 +185,44 @@ public class ProfileService: ObservableObject {
         try await update(chatRoom: chatRoom)
     }
     
+//    @MainActor
+//    public func listenToChatMessages(for chatRoom: ChatRoom) async throws -> [ChatMessage] {
+//        let queryItems = [
+//            QueryItem("adminUid", .isEqualTo, chatRoom.adminUid),
+//            QueryItem("merchantUid", .isEqualTo, chatRoom.merchantUid)
+//        ]
+//        return try await withCheckedThrowingContinuation({ continuation in
+//            FirestoreManager<ChatMessage>.listenTo(Path.Firestore.chatMessages, queryItems: queryItems).sink { result in
+//                switch result {
+//                case .finished:
+//                    break
+//                case .failure(let err):
+//                    continuation.resume(throwing: err)
+//                }
+//            } receiveValue: { chatMessages in
+//                continuation.resume(returning: chatMessages)
+//            }.store(in: &cancellables)
+//        })
+//    }
+    
     @MainActor
-    public func listenToChatMessages(for chatRoom: ChatRoom) async throws -> [ChatMessage] {
+    public func listenToChatMessages(for chatRoom: ChatRoom, completion: @escaping (Result<[ChatMessage], Error>) -> ()) {
         let queryItems = [
             QueryItem("adminUid", .isEqualTo, chatRoom.adminUid),
             QueryItem("merchantUid", .isEqualTo, chatRoom.merchantUid)
         ]
-        return try await withCheckedThrowingContinuation({ continuation in
-            FirestoreManager<ChatMessage>.listenTo(Path.Firestore.chatMessages, queryItems: queryItems).sink { result in
-                switch result {
-                case .finished:
-                    break
-                case .failure(let err):
-                    continuation.resume(throwing: err)
+        let promise = FirestoreManager<ChatMessage>.listenTo(Path.Firestore.chatMessages, queryItems: queryItems)
+        PassthroughPromise.fulfill(promise, storedIn: &cancellables) { result in
+            switch result {
+            case .success(let chatMessages):
+                let orderedChatMessages = chatMessages.sorted { cm0, cm1 in
+                    cm0.createdAt.dateValue() < cm1.createdAt.dateValue()
                 }
-            } receiveValue: { chatMessages in
-                continuation.resume(returning: chatMessages)
-            }.store(in: &cancellables)
-        })
+                completion(.success(orderedChatMessages))
+            case .failure(let err):
+                completion(.failure(err))
+            }
+        }
     }
 }
 
