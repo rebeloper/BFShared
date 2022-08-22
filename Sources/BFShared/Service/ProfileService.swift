@@ -72,12 +72,17 @@ public class ProfileService: ObservableObject {
     
     @MainActor
     public func update(merchant: Merchant) async throws {
-        let _ = try await FirestoreManager.update(merchant, atPath: Path.Firestore.merchants)
+        self.merchant = try await FirestoreManager.update(merchant, atPath: Path.Firestore.merchants)
     }
     
     @MainActor
     public func update(admin: Admin) async throws {
-        let _ = try await FirestoreManager.update(admin, atPath: Path.Firestore.admins)
+        self.admin = try await FirestoreManager.update(admin, atPath: Path.Firestore.admins)
+    }
+    
+    @MainActor
+    public func update(customer: Customer) async throws {
+        self.customer = try await FirestoreManager.update(customer, atPath: Path.Firestore.customers)
     }
     
     @MainActor
