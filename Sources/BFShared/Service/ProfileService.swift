@@ -206,6 +206,15 @@ public class ProfileService: ObservableObject {
 //    }
     
     @MainActor
+    public func listenToChatMessages(for chatRoom: ChatRoom) async throws -> [ChatMessage] {
+        return try await withCheckedThrowingContinuation({ continuation in
+            listenToChatMessages(for: chatRoom) { result in
+                continuation.resume(with: result)
+            }
+        })
+    }
+    
+    @MainActor
     public func listenToChatMessages(for chatRoom: ChatRoom, completion: @escaping (Result<[ChatMessage], Error>) -> ()) {
         let queryItems = [
             QueryItem("adminUid", .isEqualTo, chatRoom.adminUid),
