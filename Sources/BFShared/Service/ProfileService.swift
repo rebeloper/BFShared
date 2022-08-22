@@ -51,6 +51,11 @@ public class ProfileService: ObservableObject {
     }
     
     @MainActor
+    public func fetchAdmins() async throws -> [Admin] {
+        return try await FirestoreManager.query(path: Path.Firestore.admins)
+    }
+    
+    @MainActor
     public func fetchCustomer(uid: String) async throws {
         customer = try await FirestoreManager.read(atPath: Path.Firestore.customers, uid: uid)
     }
