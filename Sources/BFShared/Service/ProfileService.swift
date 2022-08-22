@@ -155,6 +155,11 @@ public class ProfileService: ObservableObject {
     }
     
     @MainActor
+    public func update(chatRoom: ChatRoom) async throws {
+        let _ = try await FirestoreManager.update(chatRoom, atPath: Path.Firestore.chatRooms)
+    }
+    
+    @MainActor
     public func create(chatMessage: ChatMessage) async throws {
         let _ = try await FirestoreManager.create(chatMessage, atPath: Path.Firestore.chatMessages)
     }
