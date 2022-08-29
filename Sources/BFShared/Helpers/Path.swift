@@ -21,6 +21,8 @@ public struct Path {
         
         public static let chatRooms = "chatRooms"
         public static let chatMessages = "chatMessages"
+        
+        public static let stripe_connect_accounts = "stripe_connect_accounts"
     }
     
     public struct Storage {
