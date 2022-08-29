@@ -185,6 +185,7 @@ public class StripeService : ObservableObject {
         stripeConnectAccountLinkUrl = url
     }
     
+    @MainActor
     public func getAccountId() async throws {
         guard let uid = Auth.auth().currentUser?.uid else {
             throw FirebaseError.noUid
@@ -194,6 +195,7 @@ public class StripeService : ObservableObject {
         self.accountId = stripeConnectAccount.accountId
     }
     
+    @MainActor
     public func getAccountId(merchant: Merchant) async throws {
         let promise = FirestoreService<StripeConnectAccount>.read(atPath: Path.Firestore.stripe_connect_accounts, uid: merchant.uid)
         let stripeConnectAccount = try await AsyncPromise.fulfill(promise, storedIn: &cancellables)
