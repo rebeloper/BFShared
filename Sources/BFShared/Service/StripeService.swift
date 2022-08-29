@@ -16,6 +16,8 @@ import Combine
 
 public class StripeService : ObservableObject {
     
+    public init() {}
+    
     public var cancellables: Set<AnyCancellable> = []
     
     @Published public var paymentSheet: PaymentSheet?
