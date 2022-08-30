@@ -27,6 +27,7 @@ public struct Path {
     
     public struct Storage {
         public static let merchantProfileImages = "merchantProfileImages"
+        public static let productImages = "productImages"
     }
     
 }
