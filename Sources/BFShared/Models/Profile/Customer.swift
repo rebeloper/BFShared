@@ -21,7 +21,7 @@ public struct Customer: Codable, Identifiable, Firestorable, Hashable {
     @DefaultEmptyString public var phone: String
     @DefaultEmptyString public var fcmToken: String
     @DefaultEmptyString public var profileImageUrl: String
-    @DefaultEmptyArray var favoriteMerchants: [String]
+    @DefaultEmptyArray public var favoriteMerchants: [String]
     
     public init(uid: String? = nil,
                 createdAt: Timestamp? = nil,
