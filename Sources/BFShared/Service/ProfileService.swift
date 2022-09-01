@@ -127,13 +127,19 @@ public class ProfileService: ObservableObject {
     }
     
     @MainActor
+    public func saveCustomerProfile(image: UIImage, oldImageUrl: String) async throws -> URL {
+        try await StorageService.handleImageChange(newImage: image, folderPath: Path.Storage.customerProfileImages, compressionQuality: 0.5, oldImageUrl: oldImageUrl.removingPercentEncoding!)
+        // TODO: - Remove removingPercentEncoding once it's fixed in the Firebase SDK
+    }
+    
+    @MainActor
     public func saveMerchantProfile(image: UIImage, oldImageUrl: String) async throws -> URL {
-        try await StorageService.handleImageChange(newImage: image, folderPath: Path.Storage.merchantProfileImages, compressionQuality: 0.5, oldImageUrl: oldImageUrl)
+        try await StorageService.handleImageChange(newImage: image, folderPath: Path.Storage.merchantProfileImages, compressionQuality: 0.5, oldImageUrl: oldImageUrl.removingPercentEncoding!)
     }
     
     @MainActor
     public func saveProduct(image: UIImage, oldImageUrl: String) async throws -> URL {
-        try await StorageService.handleImageChange(newImage: image, folderPath: Path.Storage.productImages, compressionQuality: 0.5, oldImageUrl: oldImageUrl)
+        try await StorageService.handleImageChange(newImage: image, folderPath: Path.Storage.productImages, compressionQuality: 0.5, oldImageUrl: oldImageUrl.removingPercentEncoding!)
     }
     
     @MainActor
