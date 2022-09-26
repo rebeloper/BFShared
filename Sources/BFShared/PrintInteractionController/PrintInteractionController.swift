@@ -31,15 +31,17 @@ public struct PrintInteractionController {
         let printController = UIPrintInteractionController()
         printController.printInfo = printInfo
         printController.printingItem = url
-        printController.present(animated: true) { _, completed, error in
-            guard let completion = completion else { return }
-            if completed {
-                completion(.success)
-            } else {
-                if let error = error {
-                    completion(.failure(error))
+        DispatchQueue.main.async {
+            printController.present(animated: true) { _, completed, error in
+                guard let completion = completion else { return }
+                if completed {
+                    completion(.success)
                 } else {
-                    completion(.userCancelled)
+                    if let error = error {
+                        completion(.failure(error))
+                    } else {
+                        completion(.userCancelled)
+                    }
                 }
             }
         }
