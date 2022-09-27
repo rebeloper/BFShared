@@ -22,6 +22,9 @@ public struct Customer: Codable, Identifiable, Firestorable, Hashable {
     @DefaultEmptyString public var fcmToken: String
     @DefaultEmptyString public var profileImageUrl: String
     @DefaultEmptyArray public var favoriteMerchants: [String]
+    @DefaultZeroDouble public var latitude: Double
+    @DefaultZeroDouble public var longitude: Double
+    @DefaultEmptyString public var geoHash: String
     
     public init(uid: String? = nil,
                 createdAt: Timestamp? = nil,
@@ -30,7 +33,10 @@ public struct Customer: Codable, Identifiable, Firestorable, Hashable {
                 phone: String? = nil,
                 fcmToken: String? = nil,
                 profileImageUrl: String? = nil,
-                favoriteMerchants: [String]? = nil) {
+                favoriteMerchants: [String]? = nil,
+                latitude: Double? = nil,
+                longitude: Double? = nil,
+                geoHash: String? = nil) {
         self.uid = uid ?? ""
         self.createdAt = createdAt ?? Timestamp()
         self.name = name ?? Name()
@@ -39,6 +45,9 @@ public struct Customer: Codable, Identifiable, Firestorable, Hashable {
         self.fcmToken = fcmToken ?? ""
         self.profileImageUrl = profileImageUrl ?? ""
         self.favoriteMerchants = favoriteMerchants ?? []
+        self.latitude = latitude ?? 0
+        self.longitude = longitude ?? 0
+        self.geoHash = geoHash ?? ""
     }
     
 }

@@ -90,6 +90,12 @@ public class ProfileService: ObservableObject {
     }
     
     @MainActor
+    public func fetchCustomers(geoHash: String) async throws -> [Customer] {
+        let queryItem = QueryItem("geoHash", .isEqualTo, geoHash)
+        return try await FirestoreManager.query(path: Path.Firestore.customers, queryItems: [queryItem])
+    }
+    
+    @MainActor
     public func update(customer: Customer) async throws {
         self.customer = try await FirestoreManager.update(customer, atPath: Path.Firestore.customers)
     }
