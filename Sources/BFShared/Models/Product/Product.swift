@@ -23,6 +23,7 @@ public struct Product: Codable, Identifiable, Firestorable, Hashable {
     @DefaultFalse public var isAvailable: Bool
     @DefaultZeroInt public var price: Int
     @DefaultZeroInt public var maxFlavorsCount: Int
+    @DefaultEmptyArray public var sizes: [ProductSize]
     
     public init(uid: String? = nil,
                 createdAt: Timestamp? = nil,
@@ -32,7 +33,8 @@ public struct Product: Codable, Identifiable, Firestorable, Hashable {
                 productImageUrl: String? = nil,
                 isAvailable: Bool? = nil,
                 price: Int? = nil,
-                maxFlavorsCount: Int? = nil) {
+                maxFlavorsCount: Int? = nil,
+                sizes: [ProductSize]? = nil) {
         self.uid = uid ?? ""
         self.createdAt = createdAt ?? Timestamp()
         self.name = name ?? ""
@@ -42,6 +44,7 @@ public struct Product: Codable, Identifiable, Firestorable, Hashable {
         self.isAvailable = isAvailable ?? false
         self.price = price ?? 0
         self.maxFlavorsCount = maxFlavorsCount ?? 0
+        self.sizes = sizes ?? []
     }
     
 }
