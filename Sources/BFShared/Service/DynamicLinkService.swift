@@ -12,6 +12,8 @@ import Combine
 
 public class DynamicLinkService: ObservableObject {
     
+    public init() {}
+    
     public struct Setup {
         static let scheme = "https"
         static let host = "rebeloper.com"
