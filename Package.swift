@@ -29,6 +29,7 @@ let package = Package(
             dependencies: [
                 "FirebaseService",
                 .product(name: "FirebaseFunctions", package: "Firebase"),
+                .product(name: "FirebaseDynamicLinks", package: "Firebase"),
                 .product(name: "Stripe", package: "Stripe")
             ]),
         .testTarget(
