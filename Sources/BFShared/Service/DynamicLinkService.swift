@@ -18,7 +18,7 @@ public class DynamicLinkService: ObservableObject {
         static let scheme = "https"
         static let host = "rebeloper.com"
         static let path = "/links"
-        static let domainURIPrefix = "https://brainfreezeapp.page.link"
+        static let domainURIPrefix = "https://brainfreezebackend.page.link"
         static let imageURL = "https://unsplash.com/photos/Wpg3Qm0zaGk/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8M3x8aWNlY3JlYW18fDB8fHx8MTY0Mzk3MTI3NA&force=true&w=640"
     }
     
