@@ -226,5 +226,10 @@ public class ProfileService: ObservableObject {
     public func create(coupon: Coupon) async throws {
         let _ = try await FirestoreManager.create(coupon, atPath: Path.Firestore.coupons)
     }
+    
+    @MainActor
+    public func fetchCoupons() async throws -> [Coupon] {
+        try await FirestoreManager.read(atPath: Path.Firestore.coupons)
+    }
 }
 
