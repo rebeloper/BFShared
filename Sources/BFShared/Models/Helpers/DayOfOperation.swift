@@ -14,13 +14,16 @@ import FirebaseFirestoreSwift
 public struct DayOfOperation: Codable, Hashable {
     
     @DefaultZeroInt public var day: Int
+    @DefaultFalse public var isClosed: Bool
     @DefaultEmptyHourAndMinuteOfOperation public var startsAt: HourAndMinuteOfOperation
     @DefaultEmptyHourAndMinuteOfOperation public var closesAt: HourAndMinuteOfOperation
     
     public init(day: Int? = nil,
+                isClosed: Bool? = nil,
                 startsAt: HourAndMinuteOfOperation? = nil,
                 closesAt: HourAndMinuteOfOperation? = nil) {
         self.day = day ?? 0
+        self.isClosed = isClosed ?? false
         self.startsAt = startsAt ?? HourAndMinuteOfOperation()
         self.closesAt = closesAt ?? HourAndMinuteOfOperation()
     }
