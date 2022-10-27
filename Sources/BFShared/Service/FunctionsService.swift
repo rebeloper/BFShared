@@ -74,6 +74,13 @@ public class FunctionsService: ObservableObject {
             "saturdayClosesAtMinute": operation[5].closesAt.minute,
             "sundayClosesAtHour": operation[6].closesAt.hour,
             "sundayClosesAtMinute": operation[6].closesAt.minute,
+            "isMondayClosed": operation[0].isClosed,
+            "isTuesdayClosed": operation[1].isClosed,
+            "isWednesdayClosed": operation[2].isClosed,
+            "isThursdayClosed": operation[3].isClosed,
+            "isFridayClosed": operation[4].isClosed,
+            "isSaturdayClosed": operation[5].isClosed,
+            "isSundayClosed": operation[6].isClosed,
         ] as [String : Any]
         
         return try await CallableFunctionsService.call(CallableFunctionName.createUser.rawValue, data: data)
