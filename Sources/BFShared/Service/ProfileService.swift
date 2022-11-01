@@ -238,9 +238,16 @@ public class ProfileService: ObservableObject {
     }
     
     @MainActor
-    public func fetch(coupon: Coupon) async -> Coupon? {
+    public func fetch(couponString: String) async -> Coupon? {
         do {
-            return try await FirestoreManager.read(atPath: Path.Firestore.coupons, uid: coupon.uid)
+            let queryItem = QueryItem("name", .isEqualTo, couponSting.uppercased())
+            let coupons: [Coupon] = try await FirestoreManager.query(path: Path.Firestore.coupons, queryItems: [queryItem], queryLimit: nil)
+            guard let coupon = coupons.first else { return nil }
+            guard coupon.isAvailable else { return nil }
+            guard coupon.startsAt.dateValue() < Date() else { return nil }
+            guard coupon.expiresAt.dateValue() > Date() else { return nil }
+            guard coupon.count < coupon.limit else { return nil }
+            return coupon
         } catch {
             return nil
         }
