@@ -240,7 +240,7 @@ public class ProfileService: ObservableObject {
     @MainActor
     public func fetch(couponString: String) async -> Coupon? {
         do {
-            let queryItem = QueryItem("name", .isEqualTo, couponSting.uppercased())
+            let queryItem = QueryItem("name", .isEqualTo, couponString.uppercased())
             let coupons: [Coupon] = try await FirestoreManager.query(path: Path.Firestore.coupons, queryItems: [queryItem], queryLimit: nil)
             guard let coupon = coupons.first else { return nil }
             guard coupon.isAvailable else { return nil }
