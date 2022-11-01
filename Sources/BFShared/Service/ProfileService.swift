@@ -236,5 +236,14 @@ public class ProfileService: ObservableObject {
     public func delete(coupon: Coupon) async throws {
         let _ = try await FirestoreManager.delete(coupon, atPath: Path.Firestore.coupons)
     }
+    
+    @MainActor
+    public func fetch(coupon: Coupon) async -> Coupon? {
+        do {
+            return try await FirestoreManager.read(atPath: Path.Firestore.coupons, uid: coupon.uid)
+        } catch {
+            return nil
+        }
+    }
 }
 
