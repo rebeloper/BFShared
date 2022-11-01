@@ -59,6 +59,46 @@ public struct Merchant: Codable, Identifiable, Firestorable, Hashable {
         self.operation = operation ?? []
     }
     
+    public func isClosed() -> Bool {
+        let currentDay = (Calendar.current.dateComponents(in: TimeZone.current, from: Date()).weekday ?? 0) - 1
+        guard currentDay >= 1 else { return true }
+        return operation[currentDay - 1].isClosed
+    }
+    
+    public func getOpeningHours() -> String {
+        let currentDay = (Calendar.current.dateComponents(in: TimeZone.current, from: Date()).weekday ?? 0) - 1
+        guard currentDay >= 1 else { return "N/A" }
+        return "Open:  \(operation[currentDay - 1].startsAt.hour):\(operation[currentDay - 1].startsAt.minute) - \(operation[currentDay - 1].closesAt.hour):\(operation[currentDay - 1].closesAt.minute)"
+    }
+    
+    public func isClosed(for day: Int) -> Bool {
+        operation[day - 1].isClosed
+    }
+    
+    public func getOpeningHours(for day: Int) -> String {
+        "\(operation[day - 1].startsAt.hour):\(operation[day - 1].startsAt.minute) - \(operation[day - 1].closesAt.hour):\(operation[day - 1].closesAt.minute)"
+    }
+    
+    public func getWeekdayString(for day: Int) -> String {
+        switch day {
+        case 1:
+            return "Monday"
+        case 2:
+            return "Tuesday"
+        case 3:
+            return "Wednesday"
+        case 4:
+            return "Thursday"
+        case 5:
+            return "Friday"
+        case 6:
+            return "Saturday"
+        case 7:
+            return "Sunday"
+        default:
+            return ""
+        }
+    }
 }
 
 public struct DefaultMerchantStrategy: DefaultCodableStrategy {
