@@ -252,5 +252,11 @@ public class ProfileService: ObservableObject {
             return nil
         }
     }
+    
+    @MainActor
+    public func fetchCoupons(merchant: Merchant) async throws -> [Coupon] {
+        let queryItem = QueryItem("merchantUid", .isEqualTo, merchant.uid)
+        return try await FirestoreManager.query(path: Path.Firestore.coupons, queryItems: [queryItem])
+    }
 }
 
