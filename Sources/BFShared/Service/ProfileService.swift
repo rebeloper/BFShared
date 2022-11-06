@@ -258,5 +258,10 @@ public class ProfileService: ObservableObject {
         let queryItem = QueryItem("merchantUid", .isEqualTo, merchant.uid)
         return try await FirestoreManager.query(path: Path.Firestore.coupons, queryItems: [queryItem])
     }
+    
+    @MainActor
+    public func consume(coupon: Coupon) async throws {
+        try await Firestore.firestore().collection(Path.Firestore.coupons).document(coupon.uid).updateData(["count": FieldValue.increment(1.0)])
+    }
 }
 
