@@ -244,9 +244,9 @@ public class ProfileService: ObservableObject {
             let coupons: [Coupon] = try await FirestoreManager.query(path: Path.Firestore.coupons, queryItems: [queryItem], queryLimit: nil)
             guard let coupon = coupons.first else { return nil }
             guard coupon.isAvailable else { return nil }
+            guard coupon.count < coupon.limit else { return nil }
             guard coupon.startsAt.dateValue() < Date() else { return nil }
             guard coupon.expiresAt.dateValue() > Date() else { return nil }
-            guard coupon.count < coupon.limit else { return nil }
             return coupon
         } catch {
             return nil

@@ -40,7 +40,7 @@ public struct Coupon: Codable, Identifiable, Firestorable, Hashable {
         self.uid = uid ?? ""
         self.createdAt = createdAt ?? Timestamp()
         self.startsAt = startsAt ?? Timestamp()
-        self.expiresAt = createdAt ?? Timestamp()
+        self.expiresAt = expiresAt ?? Timestamp()
         self.name = name ?? ""
         self.discount = discount ?? 0
         self.discountType = discountType ?? 0
