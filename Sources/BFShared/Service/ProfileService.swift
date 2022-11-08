@@ -169,7 +169,7 @@ public class ProfileService: ObservableObject {
         ]
         let orders: [Order] = try await FirestoreManager.query(path: Path.Firestore.orders, queryItems: queryItems)
         let sortedOrders = orders.sorted { o0, o1 in
-            o0.createdAt.dateValue() < o1.createdAt.dateValue()
+            o0.createdAt.dateValue() > o1.createdAt.dateValue()
         }
         return sortedOrders
     }
