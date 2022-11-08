@@ -19,6 +19,7 @@ public struct Order: Codable, Identifiable, Firestorable, Hashable {
     @DefaultEmptyString public var customerUid: String
     @DefaultEmptyString public var merchantUid: String
     @DefaultEmptyName public var customerName: Name
+    @DefaultEmptyString public var merchantCompanyName: String
     @DefaultEmptyArray public var products: [Product]
     @DefaultEmptyCoupon public var coupon: Coupon
     @DefaultZeroInt public var tip: Int
@@ -30,6 +31,7 @@ public struct Order: Codable, Identifiable, Firestorable, Hashable {
                 customerUid: String? = nil,
                 merchantUid: String? = nil,
                 customerName: Name? = nil,
+                merchantCompanyName: String? = nil,
                 products: [Product]? = nil,
                 coupon: Coupon? = nil,
                 tip: Int? = nil,
@@ -40,6 +42,7 @@ public struct Order: Codable, Identifiable, Firestorable, Hashable {
         self.customerUid = customerUid ?? ""
         self.merchantUid = merchantUid ?? ""
         self.customerName = customerName ?? Name()
+        self.merchantCompanyName = merchantCompanyName ?? ""
         self.products = products ?? []
         self.coupon = coupon ?? Coupon()
         self.tip = tip ?? 0
