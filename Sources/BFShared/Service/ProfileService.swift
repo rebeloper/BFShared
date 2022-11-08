@@ -167,7 +167,11 @@ public class ProfileService: ObservableObject {
         let queryItems = [
             QueryItem("customerUid", .isEqualTo, customer.uid)
         ]
-        return try await FirestoreManager.query(path: Path.Firestore.orders, queryItems: queryItems)
+        let orders: [Order] = try await FirestoreManager.query(path: Path.Firestore.orders, queryItems: queryItems)
+        let sortedOrders = orders.sorted { o0, o1 in
+            o0.createdAt.dateValue() < o1.createdAt.dateValue()
+        }
+        return sortedOrders
     }
     
     @MainActor
