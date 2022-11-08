@@ -163,6 +163,14 @@ public class ProfileService: ObservableObject {
     }
     
     @MainActor
+    public func fetchOrders(for customer: Customer) async throws -> [Order] {
+        let queryItems = [
+            QueryItem("customerUid", .isEqualTo, customer.uid)
+        ]
+        return try await FirestoreManager.query(path: Path.Firestore.orders, queryItems: queryItems)
+    }
+    
+    @MainActor
     public func update(order: Order) async throws {
         let _ = try await FirestoreManager.update(order, atPath: Path.Firestore.orders)
     }
