@@ -118,6 +118,11 @@ public class ProfileService: ObservableObject {
     }
     
     @MainActor
+    public func fetchProduct(uid: String) async throws -> Product {
+        try await FirestoreManager.read(atPath: Path.Firestore.products, uid: uid)
+    }
+    
+    @MainActor
     public func delete(product: Product) async throws {
         let _ = try await FirestoreManager.delete(product, atPath: Path.Firestore.products)
     }
