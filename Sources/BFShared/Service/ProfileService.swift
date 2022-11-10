@@ -280,5 +280,13 @@ public class ProfileService: ObservableObject {
     public func consume(coupon: Coupon) async throws {
         try await Firestore.firestore().collection(Path.Firestore.coupons).document(coupon.uid).updateData(["count": FieldValue.increment(1.0)])
     }
+    
+    @MainActor
+    func updateFCMToken(_ fcmToken: String, uid: String) async throws {
+        try await fetchCustomer(uid: uid)
+        var updatedCustomer = customer
+        updatedCustomer.fcmToken = fcmToken
+        customer = try await FirestoreManager.update(updatedCustomer, atPath: Path.Firestore.customers)
+    }
 }
 
