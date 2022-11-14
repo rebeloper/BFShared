@@ -282,7 +282,7 @@ public class ProfileService: ObservableObject {
     }
     
     @MainActor
-    func updateFCMToken(_ fcmToken: String, uid: String) async throws {
+    public func updateFCMToken(_ fcmToken: String, uid: String) async throws {
         try await fetchCustomer(uid: uid)
         var updatedCustomer = customer
         updatedCustomer.fcmToken = fcmToken
