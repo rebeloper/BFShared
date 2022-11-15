@@ -9,6 +9,6 @@ import CoreLocation
 
 extension CLLocationCoordinate2D: Identifiable {
     public var id: String {
-        "\(latitude)-\(longitude)"
+        UUID().uuidString
     }
 }
