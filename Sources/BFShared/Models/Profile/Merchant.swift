@@ -68,7 +68,11 @@ public struct Merchant: Codable, Identifiable, Firestorable, Hashable {
     public func getOpeningHours() -> String {
         let currentDay = (Calendar.current.dateComponents(in: TimeZone.current, from: Date()).weekday ?? 0) - 1
         guard currentDay >= 1 else { return "N/A" }
-        return "Open:  \(operation[currentDay - 1].startsAt.hour):\(operation[currentDay - 1].startsAt.minute) - \(operation[currentDay - 1].closesAt.hour):\(operation[currentDay - 1].closesAt.minute)"
+        let startsAtHour = operation[currentDay - 1].startsAt.hour
+        let startsAtMinute = operation[currentDay - 1].startsAt.minute <= 9 ? "0\(operation[currentDay - 1].startsAt.minute)" : "\(operation[currentDay - 1].startsAt.minute)"
+        let closesAtHour = operation[currentDay - 1].closesAt.hour
+        let closesAtMinute = operation[currentDay - 1].closesAt.minute <= 9 ? "0\(operation[currentDay - 1].closesAt.minute)" : "\(operation[currentDay - 1].closesAt.minute)"
+        return "Open:  \(startsAtHour):\(startsAtMinute) - \(closesAtHour):\(closesAtMinute)"
     }
     
     public func isClosed(for day: Int) -> Bool {
@@ -76,7 +80,11 @@ public struct Merchant: Codable, Identifiable, Firestorable, Hashable {
     }
     
     public func getOpeningHours(for day: Int) -> String {
-        "\(operation[day - 1].startsAt.hour):\(operation[day - 1].startsAt.minute) - \(operation[day - 1].closesAt.hour):\(operation[day - 1].closesAt.minute)"
+        let startsAtHour = operation[day - 1].startsAt.hour
+        let startsAtMinute = operation[day - 1].startsAt.minute <= 9 ? "0\(operation[day - 1].startsAt.minute)" : "\(operation[day - 1].startsAt.minute)"
+        let closesAtHour = operation[day - 1].closesAt.hour
+        let closesAtMinute = operation[day - 1].closesAt.minute <= 9 ? "0\(operation[day - 1].closesAt.minute)" : "\(operation[day - 1].closesAt.minute)"
+        return "\(startsAtHour):\(startsAtMinute) - \(closesAtHour):\()"
     }
     
     public func getWeekdayString(for day: Int) -> String {
