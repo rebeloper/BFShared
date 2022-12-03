@@ -27,4 +27,12 @@ public extension Int {
             }
         }
     }
+    
+    func twelveHourFormat() -> Int {
+        if self >= 13 {
+            return self - 12
+        } else {
+            return self
+        }
+    }
 }
