@@ -72,7 +72,7 @@ public struct Merchant: Codable, Identifiable, Firestorable, Hashable {
         let startsAtMinute = operation[currentDay - 1].startsAt.minute <= 9 ? "0\(operation[currentDay - 1].startsAt.minute)" : "\(operation[currentDay - 1].startsAt.minute)"
         let closesAtHour = operation[currentDay - 1].closesAt.hour
         let closesAtMinute = operation[currentDay - 1].closesAt.minute <= 9 ? "0\(operation[currentDay - 1].closesAt.minute)" : "\(operation[currentDay - 1].closesAt.minute)"
-        return "Open:  \(startsAtHour):\(startsAtMinute) - \(closesAtHour):\(closesAtMinute)"
+        return "Open:  \(startsAtHour.twelveHourFormat()):\(startsAtMinute) - \(closesAtHour.twelveHourFormat()):\(closesAtMinute)"
     }
     
     public func isClosed(for day: Int) -> Bool {
@@ -84,7 +84,7 @@ public struct Merchant: Codable, Identifiable, Firestorable, Hashable {
         let startsAtMinute = operation[day - 1].startsAt.minute <= 9 ? "0\(operation[day - 1].startsAt.minute)" : "\(operation[day - 1].startsAt.minute)"
         let closesAtHour = operation[day - 1].closesAt.hour
         let closesAtMinute = operation[day - 1].closesAt.minute <= 9 ? "0\(operation[day - 1].closesAt.minute)" : "\(operation[day - 1].closesAt.minute)"
-        return "\(startsAtHour):\(startsAtMinute) - \(closesAtHour):\(closesAtMinute)"
+        return "\(startsAtHour.twelveHourFormat()):\(startsAtMinute) - \(closesAtHour.twelveHourFormat()):\(closesAtMinute)"
     }
     
     public func getWeekdayString(for day: Int) -> String {
