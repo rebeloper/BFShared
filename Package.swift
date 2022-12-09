@@ -17,7 +17,7 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
-        .package(url: "https://github.com/rebeloper/FirebaseService.git", from: "2.0.1"),
+        .package(url: "https://github.com/rebeloper/FirebaseService.git", from: "3.0.0"),
         .package(name: "Firebase", url: "https://github.com/firebase/firebase-ios-sdk.git", .upToNextMajor(from: "9.3.0")),
         .package(name: "Stripe", url: "https://github.com/stripe/stripe-ios.git", .upToNextMajor(from: "22.0.0"))
     ],
