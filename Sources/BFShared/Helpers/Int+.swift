@@ -14,7 +14,8 @@ public extension Int {
     
     func toStripeString(currency: String = "$ ") -> String {
         if self == 0 {
-            return "FREE"
+//            return "FREE"
+            return "\(currency)0"
         } else {
             if self % 10 == 0 {
                 if self % 100 == 0 {
