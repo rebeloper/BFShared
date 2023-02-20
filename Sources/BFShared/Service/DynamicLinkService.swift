@@ -16,7 +16,7 @@ public class DynamicLinkService: ObservableObject {
     
     public struct Setup {
         static let scheme = "https"
-        static let host = "rebeloper.com"
+        static let host = "brainfreeze.app"
         static let path = "/links"
 #if DEBUG
         static let domainURIPrefix = "https://brainfreezebackenddev.page.link"
