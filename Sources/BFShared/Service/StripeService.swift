@@ -32,7 +32,7 @@ public class StripeService : ObservableObject {
     
     @Published public var accountId = ""
     
-    let serviceFeePercentage: Double = 9 // make sure this is exactly the same as set up in the: firebase functions:config:set stripe.application_fee_percentage="9"
+    public let serviceFeePercentage: Double = 9 // make sure this is exactly the same as set up in the: firebase functions:config:set stripe.application_fee_percentage="9"
     
     public func setupPreparePayment(amount: Int, currency: String, stripeConnectAccountId: String, timeout: Int = 4, completion: @escaping (Error?) -> ()) {
         guard amount > 1 else {
